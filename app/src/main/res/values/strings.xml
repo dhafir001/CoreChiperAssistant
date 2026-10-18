@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CoreChiperAssistant</string>
+    <string name="tagline">Satu Aplikasi. Seluruh Hidup Anda.</string>
+    <string name="nav_home">Beranda</string>
+    <string name="nav_explore">Jelajah</string>
+    <string name="nav_quick_add">Tambah</string>
+    <string name="nav_insights">Statistik</string>
+    <string name="nav_profile">Profil</string>
+</resources>
