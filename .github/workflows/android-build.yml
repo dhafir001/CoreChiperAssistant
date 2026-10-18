@@ -22,7 +22,7 @@ jobs:
           java-version: '17'
 
       - name: 3. Set up Android SDK
-        uses: android-actions/setup-android@v3
+        uses: android-actions/setup-android@v4
 
       - name: 4. Configure Gradle & Grant Execute Permission
         uses: gradle/actions/setup-gradle@v3
