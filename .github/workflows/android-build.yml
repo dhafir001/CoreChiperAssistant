@@ -24,17 +24,14 @@ jobs:
       - name: 3. Set up Android SDK
         uses: android-actions/setup-android@v4
 
-      - name: 4. Configure Gradle & Auto-Generate Wrapper
+      - name: 4. Configure Gradle
         uses: gradle/actions/setup-gradle@v3
-        with:
-          # Otomatis membuat gradlew jika belum ada di repositori
-          generate-gradle-wrapper: 'true'
 
       - name: 5. Run Unit Tests
-        run: ./gradlew testDebugUnitTest --no-daemon
+        run: gradle testDebugUnitTest --no-daemon
 
       - name: 6. Build Debug APK
-        run: ./gradlew assembleDebug --no-daemon
+        run: gradle assembleDebug --no-daemon
 
       - name: 7. Verify Generated APK Exists
         run: |
