@@ -1,0 +1,53 @@
+name: CoreChiperAssistant Android Debug APK CI
+
+on:
+  push:
+    branches: [ "main", "master", "develop" ]
+  pull_request:
+    branches: [ "main", "master" ]
+  workflow_dispatch:
+
+jobs:
+  build-debug-apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 1. Check out repository
+        uses: actions/checkout@v4
+
+      - name: 2. Configure JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: 3. Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: 4. Configure Gradle & Grant Execute Permission
+        uses: gradle/actions/setup-gradle@v3
+
+      - name: Make gradlew executable
+        run: chmod +x ./gradlew
+
+      - name: 5. Run Unit Tests
+        run: ./gradlew testDebugUnitTest
+
+      - name: 6. Build Debug APK
+        run: ./gradlew assembleDebug
+
+      - name: 7. Verify Generated APK Exists
+        run: |
+          if [ -f "app/build/outputs/apk/debug/app-debug.apk" ]; then
+            echo "Verified: APK exists at app/build/outputs/apk/debug/app-debug.apk"
+          else
+            echo "Error: APK was not found!"
+            exit 1
+          fi
+
+      - name: 8. Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: CoreChiperAssistant-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
