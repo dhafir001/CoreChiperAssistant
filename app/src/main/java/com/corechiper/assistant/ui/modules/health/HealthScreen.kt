@@ -164,7 +164,7 @@ fun HealthScreen(vm: MainViewModel, onBack: () -> Unit) {
                                         if (rec.notes.isNotBlank()) Text(rec.notes, style = MaterialTheme.typography.bodySmall)
                                         Text(Formatters.formatDate(rec.recordedAt), style = MaterialTheme.typography.labelSmall)
                                     }
-                                    IconButton(onClick = { vm.viewModelScope; /* delete supported via DAO */ }) {
+                                   IconButton(onClick = { /* Hapus record kesehatan */ }) {
                                         Icon(Icons.Default.Delete, contentDescription = null)
                                     }
                                 }
